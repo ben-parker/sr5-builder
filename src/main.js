@@ -5,6 +5,7 @@ import App from './App.vue'
 import metatypes from './data/metatypes.js'
 import attributeState from './state/attributeState.js'
 import actions from './state/actions.js'
+import buildInfo from './state/buildInfo.js'
 
 Vue.use(Vuex);
 Vue.config.productionTip = false;
@@ -12,14 +13,18 @@ Vue.config.productionTip = false;
 const store = new Vuex.Store({
   state: {
     character: {
-      metatype: metatypes.ORK,
+      metatype: metatypes.HUMAN,
       attributes: attributeState
-    }
+    },
+    buildInfo: buildInfo,
   },
   mutations: {
     commitAttribute (state, payload) {
-      state.character.attributes[payload.attribute].base = payload.value;
-      state.character.attributes[payload.attribute].augmented = payload.augmented;
+      state.character.attributes.core[payload.attribute].base = payload.value;
+      state.character.attributes.core[payload.attribute].augmented = payload.augmented;
+    },
+    commitAttributePointsRemaining (state, payload) {
+      state.buildInfo.attributePointsRemaining = payload.remainingPoints;
     }
   },
   actions: actions

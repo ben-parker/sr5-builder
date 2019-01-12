@@ -25,8 +25,37 @@ const actions = {
     // recalculate derived stats
     // recalculate dice pools
     // update build points
-
+    let pointsUsed = 0;
+    for (const attribute of Object.keys(state.character.attributes.core)) {
+      pointsUsed += findAttributePointsUsed(state.character, attribute);
+    }
+    
+    const remainingPoints = state.buildInfo.attributePoints - pointsUsed;
+    
+    commit('commitAttributePointsRemaining', {
+      remainingPoints: remainingPoints
+    });
   }
 };
+
+function findAttributePointsUsed(characterState, attribute) {
+  const attributeMin = characterState.metatype[attribute].min;
+  let difference, currentValue;
+  
+  if (characterState.attributes.core[attribute].base) {
+    currentValue = characterState.attributes.core[attribute].base;
+  }
+  else {
+    currentValue = 0;
+  }
+
+  difference = parseInt(currentValue - attributeMin);
+
+  if (difference < 0) {
+    difference = 0;
+  }
+  
+  return difference;
+}
 
 export default actions;

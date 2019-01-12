@@ -83,22 +83,12 @@ export default {
         event.target.value = "";
       }
       else {
-        const allAttributeInputs = Array.from(document.querySelectorAll('input.attribute-input'));
-        
-        const allAttributeValues = allAttributeInputs.map(i => {
-          let numericValue = parseInt(i.value);
-          
-          if (isNaN(numericValue)) {
-            numericValue = 0;
-          }
-
-          return { attribute: i.id.toUpperCase(), value: numericValue }
-        });
+        // truncate anything after a decimal point to just the integer portion
+        event.target.value = parsedValue;
 
         this.$store.dispatch('updateAttribute', {
           attribute: event.target.id.toUpperCase(),
-          value: parsedValue,
-          allAttributes: allAttributeValues
+          value: parsedValue
         });
       }
     },

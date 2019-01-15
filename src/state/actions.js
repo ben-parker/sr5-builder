@@ -1,3 +1,5 @@
+import attributes from '../data/attributes.js'
+
 const actions = {
   updateAttribute ({commit, state}, payload) {
     let attributeValue = payload.value;
@@ -25,35 +27,26 @@ const actions = {
     // recalculate derived stats
     // recalculate dice pools
     // update build points
-    let pointsUsed = 0;
+  },
+  updatePriorities ({commit, state}, payload) {
+    const newPriorities = payload;
+    commit('commitPriorities', newPriorities);
+  },
+  updateMetatype ({commit, dispatch, state}, payload) {
+    commit('commitMetatype', payload);
+
     for (const attribute of Object.keys(state.character.attributes.core)) {
-      pointsUsed += calcAttributePointsUsed(state.character, attribute);
+      dispatch('updateAttribute', {
+        attribute: attribute,
+        value: state.character.attributes.core[attribute].base
+      });
     }
-    
-    const remainingPoints = state.buildInfo.attributePoints - pointsUsed;
-    
-    commit('commitAttributePointsRemaining', { remainingPoints });
+
+    dispatch('updateAttribute', {
+      attribute: attributes.EDGE,
+      value: state.character.attributes.special[attributes.EDGE].base
+    });
   }
 };
-
-function calcAttributePointsUsed(characterState, attribute) {
-  const attributeMin = characterState.metatype[attribute].min;
-  let difference, currentValue;
-  
-  if (characterState.attributes.core[attribute].base) {
-    currentValue = characterState.attributes.core[attribute].base;
-  }
-  else {
-    currentValue = 0;
-  }
-
-  difference = parseInt(currentValue - attributeMin);
-
-  if (difference < 0) {
-    difference = 0;
-  }
-  
-  return difference;
-}
 
 export default actions;

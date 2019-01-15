@@ -3,50 +3,54 @@ import attributes from '../data/attributes.js'
 const attributeState = {
   core: {
     [attributes.BODY]: {
-      base: null,
-      augmented: null
+      base: 1,
+      augmented: 1
     },
     [attributes.AGILITY]: {
-      base: null,
-      augmented: null
+      base: 1,
+      augmented: 1
     },
     [attributes.REACTION]: {
-      base: null,
-      augmented: null
+      base: 1,
+      augmented: 1
     },
     [attributes.STRENGTH]: {
-      base: null,
-      augmented: null
+      base: 1,
+      augmented: 1
     },
     [attributes.CHARISMA]: {
-      base: null,
-      augmented: null
+      base: 1,
+      augmented: 1
     },
     [attributes.INTUITION]: {
-      base: null,
-      augmented: null
+      base: 1,
+      augmented: 1
     },
     [attributes.LOGIC]: {
-      base: null,
-      augmented: null
+      base: 1,
+      augmented: 1
     },
     [attributes.WILLPOWER]: {
-      base: null,
-      augmented: null
+      base: 1,
+      augmented: 1
     }
   },
   special: {
     [attributes.EDGE]: {
-      base: null,
-      augmented: null
+      base: 2,
+      augmented: 2
     },
     [attributes.MAGIC]: {
-      base: null,
-      augmented: null
+      base: 0,
+      augmented: 0
     },
     [attributes.RESONANCE]: {
-      base: null,
-      augmented: null
+      base: 0,
+      augmented: 0
+    },
+    [attributes.ESSENCE]: {
+      base: 6,
+      augmented: 6
     }
   }
 };

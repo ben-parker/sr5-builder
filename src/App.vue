@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <BuildInfo />
-    <div class="panel-title">Attributes</div>
+    <PriorityPanel />
     <AttributePanel />
   </div>
 </template>
@@ -9,12 +9,14 @@
 <script>
 import AttributePanel from './attributes/AttributePanel.vue'
 import BuildInfo from './summary/BuildInfo.vue'
+import PriorityPanel from './priorities/PriorityPanel.vue'
 
 export default {
   name: 'app',
   components: {
     AttributePanel,
-    BuildInfo
+    BuildInfo,
+    PriorityPanel,
   }
 }
 </script>
@@ -25,6 +27,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin-top: 60px;
+  display: grid;
+  gap: 20px 10px;
 }
 
 .panel-title {
